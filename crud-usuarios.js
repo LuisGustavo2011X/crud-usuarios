@@ -16,8 +16,8 @@ function perguntar(texto, callback) {
     })
 }
 function acharIndicePorId(id){
-    for(let i =0; i < carros.length; i++) {
-        if (carros[i].id === id) {
+    for(let i =0; i < usuarios.length; i++) {
+        if (usuarios[i].id === id) {
             return i;
         }
     }
@@ -51,7 +51,7 @@ function cadastrarUsuarios () {
                         id: proximoID,
                         nome: nome,
                         idade: idade,
-                        senha: senha,
+                        senha: senha
 
                     }
 
@@ -82,12 +82,33 @@ function cadastrarUsuarios () {
                 "| Nome: ", u.nome,
                 "| Senha: ", u.senha,
                 "| Idade: ", u.idade,
-                
             )
         }
         menu()
     }
-
+    function deletarUsuario() {
+        console.log("Deletar Usuario");
+    
+        perguntar("Digite o ID: ", (idStr) => {
+            const id = Number(idStr);
+            if (Number.isNaN(id)) {
+                console.log("Erro: ID invalido")
+                return menu();
+            }
+    
+            const posicao = acharIndicePorId(id);
+    
+            if (posicao === -1) {
+                console.log("Usuario não encontrado");
+                return menu();
+            }
+    
+            usuarios.splice(posicao, 1);
+    
+            console.log("Deletado com sucesso");
+            menu();
+        })
+    }
 
 
 function mostrarMenu () {
