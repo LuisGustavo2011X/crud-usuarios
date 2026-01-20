@@ -5,6 +5,70 @@ const rl = readline.createInterface({
     output: process.stdout,
 });
 
+let usuarios = [];
+let proximoID = 1;
+
+
+
+function perguntar(texto, callback) {
+    rl.question(texto, (resposta) => {
+        callback(resposta);
+    })
+}
+function acharIndicePorId(id){
+    for(let i =0; i < carros.length; i++) {
+        if (carros[i].id === id) {
+            return i;
+        }
+    }
+    return -1
+}
+
+function cadastrarUsuarios () {
+    console.log("\n Cadastar usuario");
+    perguntar("Nome: ", (nome) => {
+        perguntar("Senha: ", (senha) => {
+            perguntar("Idade: ", (idadeStr) => {
+               
+                    nome = nome.trim();
+                    senha = senha.trim();
+                    const idade = Number(idadeStr);
+        
+
+                    if (!nome || !senha || Number.isNaN(idade)) {
+                        console.log("ERRO: Dados errados");
+                        return menu();
+                    }
+
+                    for (let i = 0; i < usuarios.length; i++) {
+                        if (usuarios[i].nome === nome) {
+                            console.log("ERRO: Nome já existe")
+                            return menu();
+                        }
+                    }
+
+                    const usuario = {
+                        id: proximoID,
+                        nome: nome,
+                        idade: idade,
+                        senha: senha,
+
+                    }
+
+                    usuarios.push(usuario)
+                    proximoID++
+
+                    console.log("Usuario cadastrado com sucesso!!! ID: ", usuario.id);
+
+                    menu()
+
+                })
+            })
+        })
+    }
+
+
+
 function mostrarMenu () {
     console.log("\n======================");
     console.log("    CRUD USUÁRIOS");
@@ -20,22 +84,36 @@ function mostrarMenu () {
 
 function menu() {
     mostrarMenu();
-
     perguntar("Escolha uma opção: ", (opcao) => {
         opcao = opcao.trim();
-
         switch (opcao) {
-            case "1": return cadastrarUsuarios();
-            case "2": return listarUsuarios();
-            case "3": return vizualizarUsuarios();
-            case "4": return editarUsuario();
-            case "5": return deletarUsuario();
+            case "1":
+                cadastrarUsuarios();
+                break;
+            case "2":
+                listarUsuarios();
+                break;
+            case "3":
+                vizualizarUsuarios();
+                break;
+            case "4":
+                editarUsuario();
+                break;
+            case "5":
+                deletarUsuario();
+                break
             case "0":
-            console.log("Saindo...");
-            rl.close();
-            return;
-        default:
-            console.log("Opção inválida!");
+                console.log("Saindo ...");
+                rl.close();
+                break;
+            default:
+                console.log("Opção Inválida")
+                menu();
+                break;
         }
-    })
+    }
+    )
 }
+
+
+menu();
