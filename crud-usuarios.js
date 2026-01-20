@@ -66,6 +66,27 @@ function cadastrarUsuarios () {
             })
         })
     }
+    function listarUsuarios() {
+        console.log("LISTAR USUARIOS");
+    
+        if (usuarios.length === 0) {
+            console.log("Nenhum Usuario cadastrado.");
+            return menu()
+        }
+    
+        for (let i = 0; i < usuarios.length; i++) {
+            console.log("Usuario cadastrado.");
+            const u = usuarios[i];
+            console.log(
+                "ID: ", u.id,
+                "| Nome: ", u.nome,
+                "| Senha: ", u.senha,
+                "| Idade: ", u.idade,
+                
+            )
+        }
+        menu()
+    }
 
 
 
