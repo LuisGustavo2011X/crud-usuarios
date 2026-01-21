@@ -143,7 +143,7 @@ function cadastrarUsuarios () {
     
                             novaSenha = novaSenha.trim();
                             if (novaSenha) {
-                                const nSenha = Number(novoAno);
+                                const nSenha = Number(novaSenha);
     
                                 if (Number.isNaN(nSenha)) {
                                     console.log("ERRO: Valor Errado");
