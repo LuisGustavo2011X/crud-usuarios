@@ -109,6 +109,58 @@ function cadastrarUsuarios () {
             menu();
         })
     }
+    function editarUsuario() {
+        console.log("editar Usuario");
+    
+        perguntar("Digite o ID: ", (idStr) => {
+            const id = Number(idStr);
+            if (Number.isNaN(id)) {
+                console.log("Erro: ID invalido")
+                return menu();
+            }
+    
+            const posicao = acharIndicePorId(id);
+    
+            if (posicao === -1) {
+                console.log("Usuario não encontrado");
+                return menu();
+            }
+    
+            const usuario = usuarios[posicao];
+    
+            perguntar(`Novo nome(${usuario.nome})`, (novoNome) => {
+                perguntar(`Nova idade(${usuario.idade})`, (novaIdade) => {
+                    perguntar(`Nova senha (${usuario.senha})`, (novaSenha) => {
+                            novoNome = novoNome.trim();
+                            if (novoNome) {
+                                usuario.nome = novoNome;
+                            }
+    
+                            novaIdade = novaIdade.trim();
+                            if (novaIdade) {
+                                usuario.idade = novaIdade;
+                            }
+    
+                            novaSenha = novaSenha.trim();
+                            if (novaSenha) {
+                                const nSenha = Number(novoAno);
+    
+                                if (Number.isNaN(nSenha)) {
+                                    console.log("ERRO: Valor Errado");
+                                }
+    
+                                usuario.idade = novaIdade;
+                            }
+    
+                            console.log("Usuario atualizado com sucesso!");
+                            menu();
+                        })
+                    })
+                })
+            })
+        })
+    }
+    
 
 
 function mostrarMenu () {
