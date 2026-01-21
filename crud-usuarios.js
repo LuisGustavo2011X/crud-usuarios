@@ -158,8 +158,8 @@ function cadastrarUsuarios () {
                     })
                 })
             })
-        })
-    }
+        }
+    
     
 
 
